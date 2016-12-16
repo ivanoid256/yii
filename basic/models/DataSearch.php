@@ -63,8 +63,6 @@ class DataSearch extends Data
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
         
@@ -75,18 +73,13 @@ class DataSearch extends Data
         
         // grid filtering conditions
         $query->andFilterWhere([
-            //'id' => $this->id,
             'YEAR(`date`)' => $this->year,
         	'MONTH(`date`)' => $this->month,
-            //'volume' => $this->volume,
-            //'address_id' => $this->address_id,
         ]);
         
         //var_dump($this->card_number);
 
         $query->andFilterWhere(['like', 'card_number', $this->card_number]);
-            //->andFilterWhere(['like', 'service', $this->service])
-        	//->andFilterWhere(['like','date', $this->year]);
         var_dump($query->sql);
 
         return $dataProvider;
